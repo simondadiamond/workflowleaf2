@@ -1,0 +1,42 @@
+---
+import React, { Suspense } from 'react';
+import Layout from '../../layouts/Layout.astro';
+import { Header } from '@/components/Header';
+import { Hero } from '@/components/Hero';
+import { PainCards } from '@/components/PainCards';
+import { HowItWorks } from '@/components/HowItWorks';
+import { KpiStrip } from '@/components/KpiStrip';
+// import { Testimonials } from '@/components/Testimonials';
+import { Pricing } from '@/components/Pricing';
+import { CtaBanner } from '@/components/CtaBanner';
+import { Footer } from '@/components/Footer';
+import { PartnerBar } from '@/components/PartnerBar';
+import { AnchorScrollHandler } from '@/components/AnchorScrollHandler';
+
+---
+
+<Layout
+  title="Automatisation Gestion Immobilière Québec | WorkflowLeaf"
+  description="WorkflowLeaf: Automatisation sur mesure pour gestion immobilière au Québec. Simplifiez loyers, maintenance et plus. Sauvez du temps, réduisez erreurs, croître."
+  lang="fr"
+  currentPath="/fr/"
+>
+  <Header client:load />
+  {/* Wrap AnchorScrollHandler in Suspense */}
+  <Suspense fallback={null}>
+    <AnchorScrollHandler client:load />
+  </Suspense>
+  <main>
+    <Hero client:load />
+    <PartnerBar client:load />
+    <PainCards client:load />
+    <HowItWorks client:load />
+    <KpiStrip client:load />
+    {/* Wrap Pricing in Suspense and client:load to fix Tabs hydration */}
+    <Suspense fallback={null}>
+      <Pricing client:load />
+    </Suspense>
+    <CtaBanner client:load />
+  </main>
+  <Footer client:load />
+</Layout>
